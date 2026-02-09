@@ -11,7 +11,7 @@ export const TESTIMONIALS: Testimonial[] = [
     company: 'airbnb',
     logo: '/icons/airbnb-white.svg',
     quote:
-      '"Edwin delivered clean and efficient code that made our app load faster and feel smoother. He\'s a pleasure to work with."',
+      '"Wilderik delivered clean and efficient code that made our app load faster and feel smoother. He\'s a pleasure to work with."',
     name: 'Sarah Liem',
     role: 'Product Manager at Techlynk',
   },
@@ -19,7 +19,7 @@ export const TESTIMONIALS: Testimonial[] = [
     company: 'coinbase',
     logo: '/icons/coinbase.svg',
     quote:
-      '"Edwin delivered clean and efficient code that made our app load faster and feel smoother. He\'s a pleasure to work with."',
+      '"Wilderik delivered clean and efficient code that made our app load faster and feel smoother. He\'s a pleasure to work with."',
     name: 'Sarah Liem',
     role: 'Product Manager at Techlynk',
   },
@@ -27,7 +27,7 @@ export const TESTIMONIALS: Testimonial[] = [
     company: 'webflow',
     logo: '/icons/webflow-white.svg',
     quote:
-      '"Edwin delivered clean and efficient code that made our app load faster and feel smoother. He\'s a pleasure to work with."',
+      '"Wilderik delivered clean and efficient code that made our app load faster and feel smoother. He\'s a pleasure to work with."',
     name: 'Sarah Liem',
     role: 'Product Manager at Techlynk',
   },

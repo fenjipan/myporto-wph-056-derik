@@ -1,11 +1,57 @@
+'use client';
+
+import { useState, type FormEvent } from 'react';
 import Image from 'next/image';
 
 import { FadeUp } from '@/components/motion';
+import SendStatusDialog from '@/components/send-status-dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
+type Status = 'idle' | 'loading' | 'success' | 'error';
+
 export default function Contact() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState<Status>('idle');
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    setStatus('loading');
+
+    try {
+      const res = await fetch('/api/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Something went wrong.');
+      }
+
+      setStatus('success');
+      setName('');
+      setEmail('');
+      setMessage('');
+    } catch {
+      setStatus('error');
+    }
+  }
+
+  function handleDialogAction() {
+    if (status === 'success') {
+      setStatus('idle');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      setStatus('idle');
+    }
+  }
+
   return (
     <section
       id='contact'
@@ -43,7 +89,7 @@ export default function Contact() {
             </p>
           </div>
 
-          <form className='flex flex-col gap-5 lg:gap-6'>
+          <form onSubmit={handleSubmit} className='flex flex-col gap-5 lg:gap-6'>
             {/* Name */}
             <div className='flex flex-col gap-2 lg:gap-3'>
               <Label className='text-sm-bold lg:text-md-bold text-neutral-25 tracking-[-0.02em]'>
@@ -51,6 +97,9 @@ export default function Contact() {
               </Label>
               <Input
                 type='text'
+                required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 placeholder='What should I call you?...'
                 className='text-md-regular lg:text-lg-regular focus:border-primary-300 h-auto rounded-none border-x-0 border-t-0 border-b border-neutral-900 bg-transparent px-2 py-4 tracking-[-0.02em] text-white shadow-none placeholder:text-neutral-500 focus-visible:ring-0 lg:p-4'
               />
@@ -63,6 +112,9 @@ export default function Contact() {
               </Label>
               <Input
                 type='email'
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder='Where can I reach you? ...'
                 className='text-md-regular lg:text-lg-regular focus:border-primary-300 h-auto rounded-none border-x-0 border-t-0 border-b border-neutral-900 bg-transparent px-2 py-4 tracking-[-0.02em] text-white shadow-none placeholder:text-neutral-500 focus-visible:ring-0 lg:p-4'
               />
@@ -75,17 +127,32 @@ export default function Contact() {
               </Label>
               <Input
                 type='text'
+                required
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
                 placeholder='Tell me about your project or just say hi :) ...'
                 className='text-md-regular lg:text-lg-regular focus:border-primary-300 h-auto rounded-none border-x-0 border-t-0 border-b border-neutral-900 bg-transparent px-2 py-4 tracking-[-0.02em] text-white shadow-none placeholder:text-neutral-500 focus-visible:ring-0 lg:p-4'
               />
             </div>
 
-            <Button variant='nav' type='submit' className='h-12 w-full'>
-              Let&apos;s Build Something
+            <Button
+              variant='nav'
+              type='submit'
+              disabled={status === 'loading'}
+              className='h-12 w-full'
+            >
+              {status === 'loading' ? 'Sending...' : "Let's Build Something"}
             </Button>
           </form>
         </div>
       </FadeUp>
+
+      {/* Send status dialog */}
+      <SendStatusDialog
+        open={status === 'success' || status === 'error'}
+        variant={status === 'success' ? 'success' : 'error'}
+        onAction={handleDialogAction}
+      />
     </section>
   );
 }

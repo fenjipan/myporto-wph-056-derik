@@ -1,0 +1,15 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 47.699 47.699" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 8">
+<path id="Vector" d="M35.2661 36.2824C42.1326 29.9771 42.5876 19.2994 36.2824 12.4329C29.9771 5.56639 19.2994 5.11138 12.4329 11.4166C5.5664 17.7218 5.11139 28.3996 11.4166 35.2661C17.7218 42.1326 28.3996 42.5876 35.2661 36.2824Z" fill="url(#paint0_linear_0_331)"/>
+<g id="Check Icon">
+<path id="Icon" d="M31.59 18.9215L22.1293 28.3822L17.829 24.0819" stroke="var(--stroke-0, #FDFDFD)" stroke-width="2.502" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_331" x1="9.33265" y1="29.5028" x2="35.1404" y2="12.0425" gradientUnits="userSpaceOnUse">
+<stop stop-color="#8E36A0"/>
+<stop offset="0.516358" stop-color="#BF4C99"/>
+<stop offset="1" stop-color="#C7706B"/>
+</linearGradient>
+</defs>
+</svg>
